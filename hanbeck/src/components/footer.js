@@ -1,5 +1,5 @@
 import React from "react"
-import { StaticQuery, graphql } from "gatsby"
+import { StaticQuery, graphql, Link } from "gatsby"
 import sprite from "../images/sprite.svg"
 import logo from "../images/logo-icon.svg"
 import signature from "../images/signature.png"
@@ -67,7 +67,7 @@ function Footer(props){
                       <div className="h">О клинике</div>
                       <ul>
                          <li><a href="">О клинике</a></li>
-                         <li><a href="">Врачи</a></li>
+                         <li><Link to="/doctors/">Врачи</Link></li>
                          <li><a href="">Оборудование</a></li>
                          <li><a href="">Цены</a></li>
                       </ul>
@@ -75,8 +75,8 @@ function Footer(props){
                    <div className="col-6">
                       <div className="h">Конаткты</div>
                       <ul>
-                         <li><a href="">Контакты</a></li>
-                         <li><a href="">Оплатить счет</a></li>
+                         <li><Link to="/contacts/">Контакты</Link></li>
+                         {/*<li><a href="">Оплатить счет</a></li>*/}
                       </ul>
                    </div>
                 </div>

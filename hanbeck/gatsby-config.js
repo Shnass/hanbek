@@ -28,6 +28,7 @@ module.exports = {
 	        `services`,
 	        `doctors`,
 	        `feedbacks`,
+	        `licenses`,
 	        //`articles`,
 	      ],
 	      queryLimit: 1000,

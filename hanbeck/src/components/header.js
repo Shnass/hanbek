@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 import logo from '../images/logo.svg';
 import servicesBg from '../images/joy-and-trust.jpg';
 import sprite from '../images/sprite.svg';
@@ -65,15 +66,15 @@ function Header(props){
 		                   Услуги
 		                 </a>
 		               </li>
+		               <li><Link to="/doctors/">Врачи</Link></li>
 		               {/*
-		               <li><a href="">Врачи</a></li>
 		               <li><a href="">Цены</a></li>
 		               <li><a href="">Акции</a></li>
 		               <li><a href="">Отзывы</a></li>
 		               <li><a href="">Оборудование</a></li>
-		               <li><a href="">Лицензии</a></li>
 					   */}
-		               <li><a href="/contacts/">Контакты</a></li>
+		               <li><Link to="/licenses/">Лицензии</Link></li>
+		               <li><Link to="/contacts/">Контакты</Link></li>
 		            </ul>
 		         </nav>
 		         <nav className="services-navi on">

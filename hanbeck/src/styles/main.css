@@ -950,6 +950,24 @@ input[type="tel"] {
       padding-bottom: 40px;
       max-width: 100%; } }
 
+/* licenses page */
+.license-unit {
+  display: flex;
+  flex-direction: column; }
+
+.licenses-list .row .col-6:nth-child(even) .license-unit figure {
+  order: -1;
+  margin-bottom: 40px;
+  margin-top: 0; }
+@media (min-width: 1200px) {
+  .licenses-list .row {
+    font-size: 24px;
+    justify-content: space-between; }
+    .licenses-list .row figure {
+      margin-top: 40px; }
+    .licenses-list .row .col-6 {
+      max-width: 510px; } }
+
 .footer {
   background: #1c1c1c;
   color: #fff;
