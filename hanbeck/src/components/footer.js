@@ -1,4 +1,5 @@
 import React from "react"
+import { StaticQuery, graphql } from "gatsby"
 import sprite from "../images/sprite.svg"
 import logo from "../images/logo-icon.svg"
 import signature from "../images/signature.png"
@@ -35,24 +36,32 @@ function Footer(props){
                 <small className="copyright">@2011-2021 ЭКОКЛИНИКА</small>
              </div>
              <div className="col-7">
-                <div className="row">
-                   <div className="col-6">
-                      <ul>
-                         <li><a href="">Дигностика</a></li>
-                         <li><a href="">Профилактика</a></li>
-                         <li><a href="">Проблемы ЖКТ</a></li>
-                         <li><a href="">Сердечные проблемы</a></li>
-                      </ul>
-                   </div>
-                   <div className="col-6">
-                      <ul>
-                         <li><a href="">Стоматология</a></li>
-                         <li><a href="">Гинекология</a></li>
-                         <li><a href="">Комплексные программы</a></li>
-                         <li><a href="">Оздоровление</a></li>
-                      </ul>
-                   </div>
-                </div>
+                 <StaticQuery
+                   query={graphql`
+                      query servicesList {
+                        allStrapiServices {
+                          edges {
+                            node {
+                              id
+                              name
+                              slug
+                            }
+                          }
+                        }
+                      }
+                   `}
+                   render={data => (
+                      <div className="row">
+                      <div className="col-6">
+                         <ul>
+                          {data.allStrapiServices.edges.map((l,index)=>(
+                            <li><a href={"/service/"+l.node.slug}>{l.node.name}</a></li>
+                          ))}
+                          </ul>
+                      </div>
+                      </div>
+                   )}
+                 />
                 <div className="row">
                    <div className="col-6">
                       <div className="h">О клинике</div>

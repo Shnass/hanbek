@@ -14,9 +14,9 @@ class Layout extends React.Component{
 	render(){
 		return(
 	  		<div className="page-container">
-	  			<Header />
+	  			<Header/>
 				{this.props.children}
-	  			<Footer />
+	  			<Footer/>
 	  		</div>
 		)
 	}

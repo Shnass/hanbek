@@ -65,13 +65,15 @@ function Header(props){
 		                   Услуги
 		                 </a>
 		               </li>
+		               {/*
 		               <li><a href="">Врачи</a></li>
 		               <li><a href="">Цены</a></li>
 		               <li><a href="">Акции</a></li>
 		               <li><a href="">Отзывы</a></li>
 		               <li><a href="">Оборудование</a></li>
 		               <li><a href="">Лицензии</a></li>
-		               <li><a href="">Контакты</a></li>
+					   */}
+		               <li><a href="/contacts/">Контакты</a></li>
 		            </ul>
 		         </nav>
 		         <nav className="services-navi on">
@@ -86,90 +88,6 @@ function Header(props){
 		                         <a href="">
 		                           <div className="h">Lorem, ipsum.</div>
 		                           <div className="p">Lorem, ipsum dolor sit amet consectetur adipisicing.</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Neque, libero!</div>
-		                           <div className="p">Labore, est beatae minus incidunt illum, dignissimos?</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Fugiat, nostrum!</div>
-		                           <div className="p">Sint odio, quod nobis tempore id? Velit.</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Quidem, labore.</div>
-		                           <div className="p">Illo voluptas minus porro aliquam iusto omnis.</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Perferendis, laudantium?</div>
-		                           <div className="p">Aliquam facilis exercitationem ullam dolorum, suscipit minus?</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Quasi, deserunt.</div>
-		                           <div className="p">Excepturi, eaque quod deleniti quisquam sed voluptatibus.</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Vero, accusantium?</div>
-		                           <div className="p">Et voluptatum, vero sint, ratione omnis debitis.</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Quae, ratione.</div>
-		                           <div className="p">Ea libero, quae iusto enim assumenda in.</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Sapiente, ipsam.</div>
-		                           <div className="p">Eligendi quis repudiandae in possimus amet unde.</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Maxime, accusantium!</div>
-		                           <div className="p">Voluptates saepe autem illo optio distinctio eligendi?</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Excepturi, obcaecati.</div>
-		                           <div className="p">Rem suscipit blanditiis omnis, a repellendus ut.</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Atque, quia.</div>
-		                           <div className="p">Sed aliquid consequuntur error laudantium totam, rem!</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Consequuntur, omnis!</div>
-		                           <div className="p">Ipsam, nemo nam quae ducimus aspernatur. Repudiandae.</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Quam, magnam?</div>
-		                           <div className="p">Ducimus aperiam corrupti possimus, earum error ad.</div>
-		                         </a>
-		                       </li>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Recusandae, a.</div>
-		                           <div className="p">Accusamus, beatae voluptates dolorem quod assumenda ad.</div>
 		                         </a>
 		                       </li>
 		                     </ul>
