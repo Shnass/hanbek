@@ -1,10 +1,27 @@
-import React from "react"
+import React, {useState} from "react"
 import { Link } from "gatsby"
 import logo from '../images/logo.svg';
 import servicesBg from '../images/joy-and-trust.jpg';
 import sprite from '../images/sprite.svg';
 
 function Header(props){
+	const[servicesDesc, servicesDescToggle] = useState(false);
+	const[naviMob, naviMobToggle] = useState(false);
+	const[naviTab, naviTabToggle] = useState(1);
+	const toggleServices = (e) => {
+	  e.preventDefault();
+	  servicesDescToggle(!servicesDesc)
+	}
+	const toggleNavi = (e) => {
+	  e.preventDefault();
+	  naviMobToggle(!naviMob)
+	}
+	const tabNavi = (e) => {
+	  e.preventDefault();
+	  console.log(+e.target.dataset.tab)
+	  naviTabToggle(+e.target.dataset.tab)
+	}
+
 	return(
 		<header className="header">
 		   <div className="w">
@@ -41,25 +58,25 @@ function Header(props){
 		            <div className="header-btn">
 		               <a href="" className="btn btn-reg btn-blue">Записаться</a>
 		            </div>
-		            <div className="navi-toggle">
-		               <svg className="inline-svg-icon show-navi">
+		            <div className="navi-toggle" onClick={toggleNavi}>
+		               <svg className="inline-svg-icon" style={{display:(naviMob)?'none':'block'}}>
 		                 <use href={sprite+"#sandwich-full"}></use>
 		               </svg>
-		               <svg className="inline-svg-icon hide-navi">
+		               <svg className="inline-svg-icon" style={{display:(!naviMob)?'none':'block'}}>
 		                 <use href={sprite+"#cross"}></use>
 		               </svg>
 		            </div>
 		         </div>
 		      </div>
-		      <div className="header-navi-row">
+		      <div className={"header-navi-row "+((!naviMob)?"":"shown")}>
 		         <div className="navi-switch">
-		           <a href="">Услуги</a>
-		           <a href="" className="on">Меню</a>
+		           <a href="" className={((naviTab===0)?"on":"")} data-tab={0} onClick={tabNavi}>Услуги</a>
+		           <a href="" className={((naviTab===1)?"on":"")} data-tab={1} onClick={tabNavi}>Меню</a>
 		         </div>
-		         <nav className="site-navi">
+		         <nav className={"site-navi " + ((naviTab===1)?"on":"")}>
 		            <ul>
 		               <li className="toggle-subnavi">
-		                 <a href="">
+		                 <a href="" onClick={toggleServices}>
 		                   <svg className="inline-svg-icon">
 		                     <use href={sprite+"#sandwich"}></use>
 		                   </svg>
@@ -77,7 +94,7 @@ function Header(props){
 		               <li><Link to="/contacts/">Контакты</Link></li>
 		            </ul>
 		         </nav>
-		         <nav className="services-navi on">
+		         <nav className={"services-navi " + ((naviTab===0)?"on":"")} style={{display:(servicesDesc)?'block':'none'}}>
 		           <div className="wrap">
 		             <div className="w">
 		               <ul>
@@ -101,7 +118,7 @@ function Header(props){
 		             <div className="bg">
 		               <div className="services-navi-bg" style={{backgroundImage:'url('+servicesBg+')'}}></div>
 		             </div>
-		             <a href="" className="navi-close">
+		             <a href="" className="navi-close" onClick={toggleServices}>
 		               <svg className="inline-svg-icon">
 		                 <use href={sprite+"#cross"}></use>
 		               </svg>

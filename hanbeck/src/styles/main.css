@@ -739,7 +739,8 @@ input[type="tel"] {
     width: auto;
     height: auto; }
   .tabs-section .block.tabs-side {
-    border-left: 1px solid #5539be; }
+    border-left: 1px solid #5539be;
+    justify-content: flex-start; }
   .tabs-section.flip .block.tabs-side {
     border-left: 0; }
   .tabs-section.flip .block:not(.tabs-side) {
@@ -1087,7 +1088,7 @@ input[type="tel"] {
             font-size: 36px;
             font-family: 'bebas neue'; }
       .header .header-navi-row nav.on {
-        display: block; }
+        display: block !important; }
       .header .header-navi-row .services-navi {
         position: relative;
         top: 0;
@@ -1217,13 +1218,8 @@ input[type="tel"] {
         content: '';
         position: absolute; }
 
-  .navi-called .header .header-btn,
-  .navi-called .header .header-navi-row {
+  .header-navi-row.shown {
     display: block; }
-  .navi-called .hide-navi {
-    display: block; }
-  .navi-called .show-navi {
-    display: none; }
 
   .footer {
     padding-top: 48px; }

@@ -1,5 +1,5 @@
-  import React from "react";
-import { graphql } from "gatsby";
+import React from "react";
+import { graphql, Link } from "gatsby";
 
 import Block from "../components/block"
 import StaticWhyWe from "../components/static-why-we"
@@ -21,12 +21,9 @@ function Service(props){
           <div className="topic-banner-text" dangerouslySetInnerHTML={{__html: service.description}} />
           <div className="topic-banner-cards">
             <div className="row">
-              <div className="col-4 col-md-6"><a href="" className="topic-banner-card">Артроз суставов <i className="hot"></i></a></div>
-              <div className="col-4 col-md-6"><a href="" className="topic-banner-card">Артроз суставов <i className="hot"></i></a></div>
-              <div className="col-4 col-md-6"><a href="" className="topic-banner-card">Артроз суставов</a></div>
-              <div className="col-4 col-md-6"><a href="" className="topic-banner-card">Артроз суставов</a></div>
-              <div className="col-4 col-md-6"><a href="" className="topic-banner-card">Артроз суставов</a></div>
-              <div className="col-4 col-md-6"><a href="" className="topic-banner-card">Артроз суставов</a></div>
+              {service.services_second_levels.map(subservice=>(
+                <div className="col-4 col-md-6"><Link to={"/service-detailed/"+subservice.slug} className="topic-banner-card">{subservice.name} <i className="hot"></i></Link></div>
+              ))}
               <div className="col-12">
                 <a href="" className="expand">
                   Показать еще
@@ -52,8 +49,7 @@ function Service(props){
             <div className="block-w">
               <div className="banner-side-text">
                  <h3>как мы это делаем?</h3>               
-                 <p>Нас часто называют нетрадиционной или альтернативной медициной. Мы же придерживаемся обратной точки зрения – наши практики как раз и есть самые, что ни на есть традиционные. Мы исходим из постулата, что красота и здоровье это единая целостная система организма.</p>
-                 <img src="images/cardio.png" alt="" className="rb-img" />
+                 {service.text_1}
               </div>
             </div>
          </div>
@@ -68,10 +64,7 @@ function Service(props){
                 <div className="block-w">
                   <div className="tab-text">
                         <div className="tech-description">
-                              <p>Нас часто называют нетрадиционной или альтернативной медициной. Мы же придерживаемся обратной точки зрения – наши практики как раз и есть самые, что ни на есть традиционные. Мы исходим из постулата, что красота и здоровье это единая целостная система организма.</p>
-                              <figure>
-                                    <img src="images/temp-service-pic.jpg" alt="" />
-                              </figure>
+                            {service.te}
                         </div>
                   </div>
                 </div>
@@ -79,7 +72,7 @@ function Service(props){
               <div className="tab">
                 <div className="block-w">
                   <div className="banner-side-text">
-
+                    {service.text_1}
                   </div>
                 </div>
               </div>
@@ -92,9 +85,8 @@ function Service(props){
          <div className="block">
             <div className="block-w">
               <div className="banner-side-text">
-                 <img src="images/logo-icon.svg" alt="" className="t-img t-logo" />
                  <h3>как мы это делаем?</h3>               
-                 <p>Нас часто называют нетрадиционной или альтернативной медициной. Мы же придерживаемся обратной точки зрения – наши практики как раз и есть самые, что ни на есть традиционные. Мы исходим из постулата, что красота и здоровье это единая целостная система организма.</p>
+                 {service.text_2}
               </div>
             </div>
          </div>
@@ -110,42 +102,15 @@ function Service(props){
                   <div className="tab-text">
                         <div className="tech-description">
                               <div className="doctor-thumb-list">
-                                    <div className="doctor-thumb-il">
-                                          <figure><a href=""><img src="images/small-doctor-thumb.jpg" alt="" /></a></figure>
-                                          <div className="doctor-thumb-text">
-                                                <a href="">
-                                                      <h4>Ринат Ханбек</h4>
-                                                      <p>Основатель клиники и описание в 2 строки</p>
-                                                </a>
-                                          </div>
-                                    </div>
-                                    <div className="doctor-thumb-il">
-                                          <figure><a href=""><img src="images/small-doctor-thumb.jpg" alt="" /></a></figure>
-                                          <div className="doctor-thumb-text">
-                                                <a href="">
-                                                      <h4>Ринат Ханбек</h4>
-                                                      <p>Основатель клиники и описание в 2 строки</p>
-                                                </a>
-                                          </div>
-                                    </div>
-                                    <div className="doctor-thumb-il">
-                                          <figure><a href=""><img src="images/small-doctor-thumb.jpg" alt="" /></a></figure>
-                                          <div className="doctor-thumb-text">
-                                                <a href="">
-                                                      <h4>Ринат Ханбек</h4>
-                                                      <p>Основатель клиники и описание в 2 строки</p>
-                                                </a>
-                                          </div>
-                                    </div>
-                                    <div className="doctor-thumb-il">
-                                          <figure><a href=""><img src="images/small-doctor-thumb.jpg" alt="" /></a></figure>
-                                          <div className="doctor-thumb-text">
-                                                <a href="">
-                                                      <h4>Ринат Ханбек</h4>
-                                                      <p>Основатель клиники и описание в 2 строки</p>
-                                                </a>
-                                          </div>
-                                    </div>
+                              {service.doctors.map(doctor=>(
+                                <div className="doctor-thumb-il">
+                                      <figure><img src={doctor.main_picture.localFile.publicURL} alt="" /></figure>
+                                      <div className="doctor-thumb-text">
+                                          <h4>{doctor.name}</h4>
+                                          <p>{doctor.role}</p>
+                                      </div>
+                                </div>
+                              ))}
                               </div>
                         </div>
                   </div>
@@ -190,6 +155,22 @@ export const query = graphql`
       description
       name
       id
+      text_2
+      text_1
+      methods
+      doctors {
+        role
+        name
+        main_picture {
+          localFile {
+            publicURL
+          }
+        }
+      }
+      services_second_levels {
+        name
+        slug
+      }
     }
     allStrapiFeedbacks {
       edges {

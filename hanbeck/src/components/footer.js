@@ -55,7 +55,7 @@ function Footer(props){
                       <div className="col-6">
                          <ul>
                           {data.allStrapiServices.edges.map((l,index)=>(
-                            <li><a href={"/service/"+l.node.slug}>{l.node.name}</a></li>
+                            <li key={l.node.id}><a href={"/service/"+l.node.slug}>{l.node.name}</a></li>
                           ))}
                           </ul>
                       </div>

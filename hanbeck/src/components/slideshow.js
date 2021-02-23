@@ -7,7 +7,7 @@ function SlideShow(props){
 		<section className="section slideshow-container mb0">
 		  <div className="slideshow">
 		  	{props.slides.map(element=>(
-		  		<Block img={element.node.picture.localFile.publicURL} bg={""} classes={"flip feedback-slide mb0"}>
+		  		<Block key={element.node.id} img={element.node.picture.localFile.publicURL} bg={""} classes={"flip feedback-slide mb0"}>
 		  		  <h2 className="h3">Что говорят люди?</h2>
 		  		  <div className="feedback-author">
 		  		    <h3 className="h1">{element.node.person}</h3>
