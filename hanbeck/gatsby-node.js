@@ -8,6 +8,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const servicesTemplate = path.resolve(`src/templates/service.js`)
   const subServicesTemplate = path.resolve(`src/templates/subservice.js`)
+  const pricesTemplate = path.resolve(`src/templates/prices.js`)
   const result = await graphql(`
     query {
       allStrapiServices {
@@ -19,6 +20,14 @@ exports.createPages = async ({ graphql, actions }) => {
         }
       }
       allStrapiServicesSecondLevels {
+        edges {
+          node {
+            slug
+            name
+          }
+        }
+      }
+      allStrapiPrices {
         edges {
           node {
             slug
@@ -42,6 +51,16 @@ exports.createPages = async ({ graphql, actions }) => {
     createPage({
       path: `/service-detailed/${edge.node.slug}`,
       component: subServicesTemplate,
+      context: {
+        slug:edge.node.slug,
+        title: edge.node.name,
+      },
+    })
+  })
+  result.data.allStrapiPrices.edges.forEach(edge => {
+    createPage({
+      path: `/prices/${edge.node.slug}`,
+      component: pricesTemplate,
       context: {
         slug:edge.node.slug,
         title: edge.node.name,

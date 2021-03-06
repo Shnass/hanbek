@@ -27,7 +27,7 @@ function IndexPage(props){
       <p>Клиника,  которой доверяют с врачами, которые все объясняют и не назначают лишнего.</p>
     </Block>
 
-    <Section title={"Услуги"} link={"/"} linkText={"все отделения"}>
+    <Section title={"Услуги"} link={"/services/"} linkText={"все отделения"}>
       <ServicesList services={props.data.allStrapiServices.edges} />
     </Section>
 
@@ -37,7 +37,7 @@ function IndexPage(props){
 
     <StaticWhyWe />
  
-    <SlideShow slides={props.data.allStrapiFeedbacks.edges} />
+    <SlideShow/>
 
     <ContactForm />
 
@@ -58,6 +58,7 @@ export const PageQuery = graphql`
         node {
           id
           name
+          slug
           short_description
         }
       }
@@ -76,20 +77,5 @@ export const PageQuery = graphql`
         }
       }
     }
-    allStrapiFeedbacks {
-     edges {
-       node {
-         id
-         person
-         role
-         feedback
-         picture {
-           localFile {
-             publicURL
-           }
-         }
-       }
-     }
-   }
   }
 `

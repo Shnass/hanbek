@@ -1,6 +1,7 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
 
+import Tabs from "../components/tabs"
 import Block from "../components/block"
 import StaticWhyWe from "../components/static-why-we"
 import ContactForm from "../components/contact-form"
@@ -24,6 +25,7 @@ function Service(props){
               {service.services_second_levels.map(subservice=>(
                 <div className="col-4 col-md-6"><Link to={"/service-detailed/"+subservice.slug} className="topic-banner-card">{subservice.name} <i className="hot"></i></Link></div>
               ))}
+              {(service.services_second_levels.length<=6)?'':(
               <div className="col-12">
                 <a href="" className="expand">
                   Показать еще
@@ -32,6 +34,7 @@ function Service(props){
                   </svg>
                 </a>
               </div>
+              )}
             </div>
           </div>
           <div className="topic-banner-bg">
@@ -54,30 +57,20 @@ function Service(props){
             </div>
          </div>
          <div className="block banner-side tabs-side">
-          <div className="tabs">
-            <div className="tabs-header">
-              <a href="" className="on">ТЕХНОЛОГИИ</a>
-              <a href="">МЕТОДЫ</a>
-            </div>
-            <div className="tabs-content">
-              <div className="tab on">
-                <div className="block-w">
-                  <div className="tab-text">
-                        <div className="tech-description">
-                            {service.te}
-                        </div>
-                  </div>
-                </div>
+          <Tabs>
+             <div className="block-w" data-tab="Технологии">
+              <div className="tab-text">
+               <div className="tech-description">
+                Технологии
+               </div>
               </div>
-              <div className="tab">
-                <div className="block-w">
-                  <div className="banner-side-text">
-                    {service.text_1}
-                  </div>
-                </div>
+             </div>
+             <div className="block-w" data-tab="Методы">
+              <div className="banner-side-text">
+               {service.text_1}
               </div>
-            </div>
-          </div>
+             </div>
+          </Tabs>
          </div>
       </section>
 
@@ -91,48 +84,38 @@ function Service(props){
             </div>
          </div>
          <div className="block banner-side tabs-side">
-          <div className="tabs">
-            <div className="tabs-header">
-              <a href="" className="on">ВРАЧИ</a>
-              <a href="">ОБОРУДОВАНИЕ</a>
-            </div>
-            <div className="tabs-content">
-              <div className="tab on">
-                <div className="block-w">
-                  <div className="tab-text">
-                        <div className="tech-description">
-                              <div className="doctor-thumb-list">
-                              {service.doctors.map(doctor=>(
-                                <div className="doctor-thumb-il">
-                                      <figure><img src={doctor.main_picture.localFile.publicURL} alt="" /></figure>
-                                      <div className="doctor-thumb-text">
-                                          <h4>{doctor.name}</h4>
-                                          <p>{doctor.role}</p>
-                                      </div>
-                                </div>
-                              ))}
-                              </div>
-                        </div>
-                  </div>
-                </div>
-              </div>
-              <div className="tab">
-                <div className="block-w">
-                  <div className="banner-side-text">
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-         </div>
+         	<Tabs>
+	            <div className="block-w" data-tab="Врачи">
+	              <div className="tab-text">
+	                    <div className="tech-description">
+	                          <div className="doctor-thumb-list">
+	                          {service.doctors.map(doctor=>(
+	                            <div className="doctor-thumb-il">
+	                                  <figure><img src={doctor.main_picture.localFile.publicURL} alt="" /></figure>
+	                                  <div className="doctor-thumb-text">
+	                                      <h4>{doctor.name}</h4>
+	                                      <p>{doctor.role}</p>
+	                                  </div>
+	                            </div>
+	                          ))}
+	                          </div>
+	                    </div>
+	              </div>
+	            </div>
+	            <div className="block-w" data-tab="Оборудование">
+	              <div className="banner-side-text">
+	              	<p>Тут будет про оборудование</p>
+	              </div>
+	            </div>
+         	</Tabs>
+	      </div>
       </section>
 
 
 
       <StaticWhyWe />
       
-      <SlideShow slides={props.data.allStrapiFeedbacks.edges} />
+      <SlideShow />
 
       <ContactForm />
 
@@ -172,20 +155,5 @@ export const query = graphql`
         slug
       }
     }
-    allStrapiFeedbacks {
-      edges {
-        node {
-          id
-          person
-          role
-          feedback
-          picture {
-            localFile {
-              publicURL
-            }
-          }
-        }
-      }
-   }
   }
 `;

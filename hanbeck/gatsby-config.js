@@ -30,7 +30,7 @@ module.exports = {
 	        `feedbacks`,
 	        `licenses`,
 	        `services-second-levels`,
-	        //`articles`,
+	        `prices`,
 	      ],
 	      queryLimit: 1000,
 	    }

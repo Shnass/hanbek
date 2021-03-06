@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import { Link } from "gatsby"
+import { StaticQuery, Link } from "gatsby"
 import logo from '../images/logo.svg';
 import servicesBg from '../images/joy-and-trust.jpg';
 import sprite from '../images/sprite.svg';
@@ -24,10 +24,88 @@ function Header(props){
 
 	return(
 		<header className="header">
+		  <div className="header-row">
 		   <div className="w">
-		      <div className="header-row">
+		      	 <div className="toggle-subnavi"  onClick={toggleServices}>
+                   <svg className="inline-svg-icon">
+                     <use href={sprite+"#sandwich-full"}></use>
+                   </svg>
+	             </div>
 		         <div className="header-logo">
 		            <a href="/"><img src={logo} alt="" /></a>
+		         </div>
+		         <div className={"header-navi "+((!naviMob)?"":"shown")}>
+	 		         <nav className={"site-navi " + ((naviTab===1)?"on":"")}>
+	 		            <ul>
+	 		               {/**/}
+	 		               <li><Link to="/services/">Услуги</Link></li>
+	 		               <li><Link to="/doctors/">Врачи</Link></li>
+	 		               <li><Link to="/licenses/">Лицензии</Link></li>
+	 		               <li><Link to="/contacts/">Контакты</Link></li>
+	 		            </ul>
+	 		         </nav>
+	 		         <nav className={"services-navi " + ((naviTab===0)?"on":"")} style={{display:(servicesDesc)?'block':'none'}}>
+	 		           <div className="wrap">
+	 		             <div className="w">
+	 	               
+	 	               	 <StaticQuery
+	 	               	   query={graphql`
+	 	               	      query subServicesList {
+	 	               	        allStrapiServices {
+	 	               	          edges {
+	                	                node {
+	                	                  id
+	                	                  name
+	                	                  services_second_levels {
+	                	                    slug
+	                	                    short_description
+	                	                    name
+	                	                  }
+	                	                  slug
+	                	                }
+	                	              }
+	 	               	        }
+	 	               	      }
+	 	               	   `}
+	 		               	   render={data => (
+	 		               	   	<ul>
+	 	               	          {data.allStrapiServices.edges.map((l,index)=>(
+	 	               	          <li key={l.node.id}>
+	 	               	          	<Link to={"/service/"+l.node.slug}>{l.node.name}</Link>
+	 	               	          	{
+	 	               	          		(!l.node.services_second_levels.length)?'':(
+	 			               	            <div className="second-level">
+	 			               	              <ul>
+	 			               	               {l.node.services_second_levels.map((subl,sublIndex)=>(
+	 			               	                <li key={sublIndex}>
+	 			               	                  <Link to={"/service-detailed/"+subl.slug}>
+	 			               	                    <div className="h">{subl.name}</div>
+	 			               	                    <div className="p">{subl.short_description}</div>
+	 			               	                  </Link>
+	 			               	                </li>
+	 			               	               ))}
+	 			               	              </ul>
+	 			               	            </div>
+	 	               	          		)
+	 	               	          	}
+	 	               	          </li>
+	 	               	          ))}
+	 		               		</ul>
+	 		               	   )}
+	 		               	 />
+
+	 		             </div>
+	 		             <div className="bg">
+	 		               <div className="services-navi-bg" style={{backgroundImage:'url('+servicesBg+')'}}></div>
+	 		             </div>
+	 		             <a href="" className="navi-close" onClick={toggleServices}>
+	 		               <svg className="inline-svg-icon">
+	 		                 <use href={sprite+"#cross"}></use>
+	 		               </svg>
+	 		             </a>
+	 		           </div>
+	 		         </nav>
+
 		         </div>
 		         <div className="header-contacts">
 		            <div className="header-socials">
@@ -42,21 +120,26 @@ function Header(props){
 		                 </svg>
 		               </a>
 		            </div>
-		            <div className="header-address">
-		               г. Москва, ул. Шаболовская, д.1
-		            </div>
 		            <div className="header-phone">
 		               <a href="tel:">
-		                 <span className="full">+7 495 111 22 33</span>
+		                 <span className="full">
+		                 	+7 495 111 22 33
+		                 </span>
 		                 <span className="short">
 		                   <svg className="inline-svg-icon">
 		                     <use href={sprite+"#phone"}></use>
 		                   </svg>
 		                 </span>
 		               </a>
+                 	   <span className="hours">ежедневно с 8:00 до 22:00</span>
 		            </div>
 		            <div className="header-btn">
-		               <a href="" className="btn btn-reg btn-blue">Записаться</a>
+		               <a href="" className="btn btn-reg btn-blue">
+		               	Записаться
+		               	<svg className="inline-svg-icon">
+		               	  <use href={sprite+"#arr-f"}></use>
+		               	</svg>
+		               </a>
 		            </div>
 		            <div className="navi-toggle" onClick={toggleNavi}>
 		               <svg className="inline-svg-icon" style={{display:(naviMob)?'none':'block'}}>
@@ -68,65 +151,14 @@ function Header(props){
 		            </div>
 		         </div>
 		      </div>
-		      <div className={"header-navi-row "+((!naviMob)?"":"shown")}>
-		         <div className="navi-switch">
-		           <a href="" className={((naviTab===0)?"on":"")} data-tab={0} onClick={tabNavi}>Услуги</a>
-		           <a href="" className={((naviTab===1)?"on":"")} data-tab={1} onClick={tabNavi}>Меню</a>
-		         </div>
-		         <nav className={"site-navi " + ((naviTab===1)?"on":"")}>
-		            <ul>
-		               <li className="toggle-subnavi">
-		                 <a href="" onClick={toggleServices}>
-		                   <svg className="inline-svg-icon">
-		                     <use href={sprite+"#sandwich"}></use>
-		                   </svg>
-		                   Услуги
-		                 </a>
-		               </li>
-		               <li><Link to="/doctors/">Врачи</Link></li>
-		               {/*
-		               <li><a href="">Цены</a></li>
-		               <li><a href="">Акции</a></li>
-		               <li><a href="">Отзывы</a></li>
-		               <li><a href="">Оборудование</a></li>
-					   */}
-		               <li><Link to="/licenses/">Лицензии</Link></li>
-		               <li><Link to="/contacts/">Контакты</Link></li>
-		            </ul>
-		         </nav>
-		         <nav className={"services-navi " + ((naviTab===0)?"on":"")} style={{display:(servicesDesc)?'block':'none'}}>
-		           <div className="wrap">
-		             <div className="w">
-		               <ul>
-		                 <li>
-		                   <a href="">диагностика</a>
-		                   <div className="second-level">
-		                     <ul>
-		                       <li>
-		                         <a href="">
-		                           <div className="h">Lorem, ipsum.</div>
-		                           <div className="p">Lorem, ipsum dolor sit amet consectetur adipisicing.</div>
-		                         </a>
-		                       </li>
-		                     </ul>
-		                     
-		                   </div>
-		                 </li>
-		               </ul>
-
-		             </div>
-		             <div className="bg">
-		               <div className="services-navi-bg" style={{backgroundImage:'url('+servicesBg+')'}}></div>
-		             </div>
-		             <a href="" className="navi-close" onClick={toggleServices}>
-		               <svg className="inline-svg-icon">
-		                 <use href={sprite+"#cross"}></use>
-		               </svg>
-		             </a>
-		           </div>
-		         </nav>
-		      </div>
 		   </div>
+
+	      <div className={"header-navi-row "+((!naviMob)?"":"shown")}>
+	         <div className="navi-switch">
+	           <a href="" className={((naviTab===0)?"on":"")} data-tab={0} onClick={tabNavi}>Услуги</a>
+	           <a href="" className={((naviTab===1)?"on":"")} data-tab={1} onClick={tabNavi}>Меню</a>
+	         </div>
+	      </div>
 		</header>
 	)
 }

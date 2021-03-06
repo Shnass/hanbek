@@ -1,17 +1,29 @@
 import React from "react";
 import { graphql, Link } from "gatsby";
+import Slider from "react-slick";
 
-import Block from "../components/block"
-import StaticWhyWe from "../components/static-why-we"
 import ContactForm from "../components/contact-form"
 import SlideShow from "../components/slideshow"
+import Tabs from "../components/tabs"
 
 import sprite from "../images/sprite.svg"
-import eye from "../images/promo-eye.jpg"
+
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
 
 function SubService(props){
 
   const service = props.data.strapiServicesSecondLevels;
+  const sliderSettings = {
+    dots: true,
+    draggable:false,
+    arrows: true,
+    infinite: false,
+    speed: 300,
+    cssEase: 'linear',
+    auto:true,
+  }
 
   return (
     <React.Fragment>
@@ -35,11 +47,13 @@ function SubService(props){
                       </div>
 
                       <div className="article-slideshow">
-                            {service.pictures.map((img, index)=>(
-                              <div className="article-slide" key={index}>
-                                  <img src={img.localFile.publicURL} alt={service.name} />
-                              </div>
-                            ))}
+                         <Slider {...sliderSettings} id="sliderNames">
+                           {service.pictures.map((img, index)=>(
+                             <div className="article-slide" key={index}>
+                                 <img src={img.localFile.publicURL} alt={service.name} />
+                             </div>
+                           ))}
+                        </Slider>
                       </div>
                 </article>
           </div>
@@ -55,30 +69,20 @@ function SubService(props){
             </div>
          </div>
          <div className="block banner-side tabs-side">
-          <div className="tabs">
-            <div className="tabs-header">
-              <a href="" className="on">ТЕХНОЛОГИИ</a>
-              <a href="">МЕТОДЫ</a>
-            </div>
-            <div className="tabs-content">
-              <div className="tab on">
-                <div className="block-w">
-                  <div className="tab-text">
-                        <div className="tech-description">
-                            {service.te}
-                        </div>
-                  </div>
-                </div>
+          <Tabs>
+             <div className="block-w" data-tab="Технологии">
+              <div className="tab-text">
+               <div className="tech-description">
+                Технологии
+               </div>
               </div>
-              <div className="tab">
-                <div className="block-w">
-                  <div className="banner-side-text">
-                    {service.text_1}
-                  </div>
-                </div>
+             </div>
+             <div className="block-w" data-tab="Методы">
+              <div className="banner-side-text">
+               {service.text_1}
               </div>
-            </div>
-          </div>
+             </div>
+          </Tabs>
          </div>
       </section>
 
@@ -92,14 +96,8 @@ function SubService(props){
             </div>
          </div>
          <div className="block banner-side tabs-side">
-          <div className="tabs">
-            <div className="tabs-header">
-              <a href="" className="on">ВРАЧИ</a>
-              <a href="">ОБОРУДОВАНИЕ</a>
-            </div>
-            <div className="tabs-content">
-              <div className="tab on">
-                <div className="block-w">
+            <Tabs>
+                <div className="block-w" data-tab="Врачи">
                   <div className="tab-text">
                         <div className="tech-description">
                               <div className="doctor-thumb-list">
@@ -116,16 +114,12 @@ function SubService(props){
                         </div>
                   </div>
                 </div>
-              </div>
-              <div className="tab">
-                <div className="block-w">
+                <div className="block-w" data-tab="Оборудование">
                   <div className="banner-side-text">
-
+                    <p>Тут будет про оборудование</p>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+            </Tabs>
          </div>
       </section>
 
@@ -134,36 +128,23 @@ function SubService(props){
             <div className="w">
                   <div className="bg-white prices-block">
                         <h2 className="h3">Наши цены</h2>
-                        <div className="price-unit">
-                              <div className="price-unit-sale">
-                                    <div className="sale-item" data-sale="15">
-                                          <span>15%</span>
-                                    </div>
-                              </div>
-                              <div className="price-unit-text">
-                                    <h3><a href="">Соствление плана питания</a></h3>
-                                    <p>Язва желудка – заболевание желудка хронического рецидивирующего характера, сопровождающееся образованием дефекта слизисто</p>
-                              </div>
-                              <div className="price-unit-price">
-                                    <div className="price">от 3000 Р</div>
-                                    <a href="" className="price-about">Что входит в цену?</a>
-                              </div>
-                        </div>
-                        <div className="price-unit">
-                              <div className="price-unit-sale">
-                                    <div className="sale-item" data-sale="15">
-                                          <span>15%</span>
-                                    </div>
-                              </div>
-                              <div className="price-unit-text">
-                                    <h3><a href="">Соствление плана питания</a></h3>
-                                    <p>Язва желудка – заболевание желудка хронического рецидивирующего характера, сопровождающееся образованием дефекта слизисто</p>
-                              </div>
-                              <div className="price-unit-price">
-                                    <div className="price">от 3000 Р</div>
-                                    <a href="" className="price-about">Что входит в цену?</a>
-                              </div>
-                        </div>
+                        {service.prices.map((unit,index)=>(
+                          <div className="price-unit">
+                                <div className="price-unit-sale">
+                                      <div className="sale-item" data-sale={unit.discount}>
+                                            <span>{unit.discount}%</span>
+                                      </div>
+                                </div>
+                                <div className="price-unit-text">
+                                      <h3><Link to={"/prices/"+unit.slug}>{unit.name}</Link></h3>
+                                      <div dangerouslySetInnerHTML={{__html: unit.description}}></div>
+                                </div>
+                                <div className="price-unit-price">
+                                      <div className="price">от {unit.price} Р</div>
+                                      <a href="" className="price-about">Что входит в цену?</a>
+                                </div>
+                          </div>
+                        ))}
                         <form className="form-linear">
                               <div className="h3">Запишитесь на приём:</div>
                               <div className="input">
@@ -178,7 +159,7 @@ function SubService(props){
 
 
       
-      <SlideShow slides={props.data.allStrapiFeedbacks.edges} />
+      <SlideShow />
 
       <ContactForm />
 
@@ -207,6 +188,14 @@ export const query = graphql`
             }
           }
         }
+        prices {
+          price
+          price_explained
+          slug
+          name
+          discount
+          description
+        }
         pictures {
           localFile {
             publicURL
@@ -217,20 +206,5 @@ export const query = graphql`
           name
         }
     }
-    allStrapiFeedbacks {
-      edges {
-        node {
-          id
-          person
-          role
-          feedback
-          picture {
-            localFile {
-              publicURL
-            }
-          }
-        }
-      }
-   }
   }
 `;

@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "gatsby"
 import sprite from '../images/sprite.svg';
 
 function ServicesList(props){
@@ -6,7 +7,7 @@ function ServicesList(props){
     <ol className="services-list">
       {props.services.map(element => (
         <li key={element.node.id}>
-           <a href="">
+           <Link to={"/service/"+element.node.slug}>
               <div className="w">
                  <h3 className="h2">{element.node.name}</h3>
                  <p>
@@ -18,7 +19,7 @@ function ServicesList(props){
                    </svg>
                  </span>
               </div>
-           </a>
+           </Link>
         </li>
       ))}
     </ol>
