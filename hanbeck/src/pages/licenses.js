@@ -15,13 +15,13 @@ function IndexPage(props){
             <div class="licenses-list">
                   <div class="row">
                         {props.data.allStrapiLicenses.edges.map(license => (
-                          <div class="col-6">
+                          <div class="col-6 col-sm-12">
                                 <div class="license-unit">
-                                      <h3>{license.node.name}</h3>
+                                      <h2>{license.node.name}</h2>
                                       <div class="license-about">
                                             {license.node.description}
                                       </div>
-                                      <figure><img src={license.node.picture.localFile.publicURL} alt="" /></figure>
+                                      <figure><img src={license.node.picture.publicURL} alt="" /></figure>
                                 </div>
                           </div>
                         ))}
@@ -50,9 +50,7 @@ export const PageQuery = graphql`
            name
            description
            picture {
-             localFile {
-               publicURL
-             }
+             publicURL
            }
          }
        }

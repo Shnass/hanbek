@@ -3,7 +3,7 @@ import sprite from "../images/sprite.svg"
 
 function Section(props){
 	return(
-		<section className={"section " + (props.classes)?props.classes:""}>
+		<section className={"section " + ((props.classes)?props.classes:"") + ((props.link)?" w-more-link":"")}>
 		  <div className="section-header">
 		      <div className="w">
 		         <div className="section-header-title">

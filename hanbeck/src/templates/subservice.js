@@ -103,7 +103,7 @@ function SubService(props){
                               <div className="doctor-thumb-list">
                               {service.doctors.map(doctor=>(
                                 <div className="doctor-thumb-il">
-                                      <figure><img src={doctor.main_picture.localFile.publicURL} alt="" /></figure>
+                                      <figure><img src={doctor.main_picture[0].localFile.publicURL} alt="" /></figure>
                                       <div className="doctor-thumb-text">
                                           <h4>{doctor.name}</h4>
                                           <p>{doctor.role}</p>
@@ -124,7 +124,7 @@ function SubService(props){
       </section>
 
 
-      <section className="section bg-grey prices-block-wrap padded">
+      <section className="section bg-beige prices-block-wrap padded mb0">
             <div className="w">
                   <div className="bg-white prices-block">
                         <h2 className="h3">Наши цены</h2>
@@ -154,6 +154,99 @@ function SubService(props){
                         </form>
                   </div>
             </div>
+      </section>
+
+      <section className="section programms-list mb0">
+      	{
+      		service.programms.map((programm,i=1)=>(
+		      	<div className={
+		      		"programm-thumb "+((i>=4 && i%4===0)?"":((i>=3 && i%3===0)?"bg-beige":(i>=2 && i%2===0)?"bg-cyan":"bg-purple"))
+		      		}>
+		      		<div className="programm-thumb-inner">
+		      			<div className="programm-thumb-wrap">
+			      			<div className="h2">
+			      				<div className="programm-icon">
+			      					<img src={programm.thumbicon.publicURL} />
+			      				</div>
+			      				<span>{programm.name}</span>
+			      			</div>
+			      			<div className="programm-thumb-content">
+			      				<p>
+			      					{programm.thumbtext}
+			      				</p>
+			      			</div>
+			      			<div className="programm-thumb-footer">
+			      				<div className="price">{programm.price} руб.</div>
+			      			</div>
+			      			<Link to={"/programms/"+programm.slug} className={
+			      				"btn btn-reg "+(((i>=4 && i%4===0) || ((i>=3 && i%3===0)))?"btn-blue":"btn-white")
+			      			}>Подробнее</Link>
+			      		</div>
+		      		</div>
+		      		<div className="programm-thumb-hover">
+		      			<Link to={"/programms/"+programm.slug}><img src={programm.thumbhover.publicURL} alt="" /><span>Подробнее</span></Link>
+		      		</div>
+		      	</div>
+      		))
+      	}
+
+
+      {/*
+      	<div className="programm-thumb bg-cyan">
+      		<div className="programm-thumb-inner">
+      			<div className="programm-thumb-wrap">
+	      			<div className="h2">
+	      				<div className="programm-icon"></div>
+	      				<span>Lorem, ipsum dolor sit amet.</span>
+	      			</div>
+	      			<div className="programm-thumb-content">
+	      				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate ex, nihil repudiandae officia, vero ab quisquam facere perferendis culpa pariatur doloribus consequuntur sint aspernatur laudantium dolorem. Ipsa, expedita! Aliquam, facilis!</p>
+	      			</div>
+	      			<div className="programm-thumb-footer">
+	      				<div className="price">1200 руб.</div>
+	      			</div>
+	      			<a href="" className="btn btn-reg btn-white">Подробнее</a>
+	      		</div>
+      		</div>
+      		<div className="programm-thumb-hover"><a href=""><img src="" alt="" /><span>Подробнее</span></a></div>
+      	</div>
+      	<div className="programm-thumb bg-beige">
+      		<div className="programm-thumb-inner">
+      			<div className="programm-thumb-wrap">
+	      			<div className="h2">
+	      				<div className="programm-icon"></div>
+	      				<span>Lorem, ipsum dolor sit amet.</span>
+	      			</div>
+	      			<div className="programm-thumb-content">
+	      				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate ex, nihil repudiandae officia, vero ab quisquam facere perferendis culpa pariatur doloribus consequuntur sint aspernatur laudantium dolorem. Ipsa, expedita! Aliquam, facilis!</p>
+	      			</div>
+	      			<div className="programm-thumb-footer">
+	      				<div className="price">1200 руб.</div>
+	      			</div>
+	      			<a href="" className="btn btn-reg btn-white">Подробнее</a>
+	      		</div>
+      		</div>
+      		<div className="programm-thumb-hover"><a href=""><img src="" alt="" /><span>Подробнее</span></a></div>
+      	</div>
+      	<div className="programm-thumb">
+      		<div className="programm-thumb-inner">
+      			<div className="programm-thumb-wrap">
+	      			<div className="h2">
+	      				<div className="programm-icon"></div>
+	      				<span>Lorem, ipsum dolor sit amet.</span>
+	      			</div>
+	      			<div className="programm-thumb-content">
+	      				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate ex, nihil repudiandae officia, vero ab quisquam facere perferendis culpa pariatur doloribus consequuntur sint aspernatur laudantium dolorem. Ipsa, expedita! Aliquam, facilis!</p>
+	      			</div>
+	      			<div className="programm-thumb-footer">
+	      				<div className="price">1200 руб.</div>
+	      			</div>
+	      			<a href="" className="btn btn-reg btn-blue">Подробнее</a>
+	      		</div>
+      		</div>
+      		<div className="programm-thumb-hover"><a href=""><img src="" alt="" /><span>Подробнее</span></a></div>
+      	</div>
+      */}
       </section>
 
 
@@ -204,6 +297,20 @@ export const query = graphql`
         service {
           slug
           name
+        }
+        programms {
+        	name
+        	slug
+        	price
+        	bg
+        	thumbtext
+        	thumbicon {
+      	    publicURL
+        	}
+        	thumbhover {
+      	    publicURL
+        	}
+
         }
     }
   }

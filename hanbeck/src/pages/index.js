@@ -11,36 +11,36 @@ import ContactForm from "../components/contact-form"
 
 import thumb1 from "../images/promo-clinic.jpg"
 import thumb2 from "../images/promo-eye.jpg"
+import thumb3 from "../images/we-have-whole-crew-here.jpg"
 
 
 // markup
 function IndexPage(props){
   return (
     <main>
-
-    <Block img={thumb1} bg={"bg-cyan"} classes={"mobile--swap-on-photo mb0"}>
-      <h2>Оздоровление организма эко методами</h2>
+     <Block img={thumb1} bg={"bg-cyan"} classes={"mobile--swap-on-photo mb0"}>
+      <h2 className="h1">Оздоровление организма эко&nbsp;методами</h2>
       <p>Клиника,  которой доверяют с врачами, которые все объясняют и не назначают лишнего.</p>
     </Block>
-    <Block img={thumb2} bg={"bg-purple"} classes={"mobile--drop-photo flip"}>
-      <h2>Уникальные системы диагностики</h2>               
+    <Block img={thumb3} bg={"bg-purple"} classes={"mobile--drop-photo flip"}>
+      <h2 className="h1" style={{maxWidth:"5em"}}>клиника <nobr>на стыке</nobr> медицин</h2>               
       <p>Клиника,  которой доверяют с врачами, которые все объясняют и не назначают лишнего.</p>
     </Block>
 
-    <Section title={"Услуги"} link={"/services/"} linkText={"все отделения"}>
+    <Section title={"Наши услуги"} link={"/services/"} linkText={"все отделения"}>
       <ServicesList services={props.data.allStrapiServices.edges} />
     </Section>
 
-    <Section title={"Наши врачи"}>
+    <Section title={"Наши врачи"} classes={"sm-mb-0 mb0"}>
       <DoctorsList doctors={props.data.allStrapiDoctors.edges} />
     </Section>
 
     <StaticWhyWe />
  
+
     <SlideShow/>
 
     <ContactForm />
-
     </main>
   )
 }

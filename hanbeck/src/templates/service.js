@@ -18,7 +18,7 @@ function Service(props){
     <React.Fragment>
       <section className="section topic-banner inverse mb0" style={{backgroundColor:service.banner_color}}>
         <div className="w">
-          <h1 className="h2">{service.name}</h1>
+          <h1>{service.name}</h1>
           <div className="topic-banner-text" dangerouslySetInnerHTML={{__html: service.description}} />
           <div className="topic-banner-cards">
             <div className="row">
@@ -38,12 +38,12 @@ function Service(props){
             </div>
           </div>
           <div className="topic-banner-bg">
-            <img src={service.banner_picture.localFile.publicURL} alt="" />
+            <img src={service.banner_picture.publicURL} alt="" />
           </div>
         </div>
       </section>
       <Block img={eye} bg={"bg-purple"} classes={"mobile--drop-photo flip mb0"}>
-        <h2>Уникальные системы диагностики</h2>               
+        <h2 class="h1">Уникальные системы диагностики</h2>               
         <p>Клиника,  которой доверяют с врачами, которые все объясняют и не назначают лишнего.</p>
       </Block>
 
@@ -51,7 +51,7 @@ function Service(props){
          <div className="block">
             <div className="block-w">
               <div className="banner-side-text">
-                 <h3>как мы это делаем?</h3>               
+                 <h2>как мы это делаем?</h2>               
                  {service.text_1}
               </div>
             </div>
@@ -78,7 +78,7 @@ function Service(props){
          <div className="block">
             <div className="block-w">
               <div className="banner-side-text">
-                 <h3>как мы это делаем?</h3>               
+                 <h2>как мы это делаем?</h2>               
                  {service.text_2}
               </div>
             </div>
@@ -91,9 +91,9 @@ function Service(props){
 	                          <div className="doctor-thumb-list">
 	                          {service.doctors.map(doctor=>(
 	                            <div className="doctor-thumb-il">
-	                                  <figure><img src={doctor.main_picture.localFile.publicURL} alt="" /></figure>
+	                                  <figure><img src={doctor.main_picture[0].localFile.publicURL} alt="" /></figure>
 	                                  <div className="doctor-thumb-text">
-	                                      <h4>{doctor.name}</h4>
+	                                      <h3>{doctor.name}</h3>
 	                                      <p>{doctor.role}</p>
 	                                  </div>
 	                            </div>
@@ -131,9 +131,7 @@ export const query = graphql`
     strapiServices(slug: { eq: $slug }) {
       banner_color
       banner_picture {
-        localFile {
-          publicURL
-        }
+        publicURL
       }
       description
       name

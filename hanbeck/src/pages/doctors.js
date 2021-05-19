@@ -10,7 +10,7 @@ function DoctorsPage(props){
   return (
     <main>
 
-    <Section title={"Наши врачи"}>
+    <Section title={"Наши врачи"} classes={"mb0"}>
       <DoctorsList doctors={props.data.allStrapiDoctors.edges} />
     </Section>
 

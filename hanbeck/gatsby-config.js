@@ -24,6 +24,7 @@ module.exports = {
 	    resolve:`gatsby-source-strapi`,
 	    options: {
 	      apiURL: `http://localhost:1337`,
+	      queryLimit: 1000,
 	      contentTypes:[
 	        `services`,
 	        `doctors`,
@@ -31,8 +32,11 @@ module.exports = {
 	        `licenses`,
 	        `services-second-levels`,
 	        `prices`,
+	        `programms`,
 	      ],
-	      queryLimit: 1000,
+	      singleTypes:[
+	      	`contact-data`
+	      ]
 	    }
 	  },
 	  `gatsby-transformer-sharp`,

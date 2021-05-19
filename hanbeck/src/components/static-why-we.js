@@ -5,7 +5,7 @@ function StaticWhyWe(props){
     return(
       <Section title={"Наши принципы"} classes={"section bg-purple inverse mb0 tt"}>
          <div className="w">
-         <div className="row">
+         <div className="row why-we">
             <div className="col-4 col-md-12">
                <h3 className="h2">Почему выбирают экоклинику?</h3>
             </div>

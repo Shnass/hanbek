@@ -1,11 +1,34 @@
 import React from "react"
-import { StaticQuery, graphql, Link } from "gatsby"
+import { useStaticQuery, StaticQuery, graphql, Link } from "gatsby"
 import sprite from "../images/sprite.svg"
 import logo from "../images/logo-icon.svg"
 import signature from "../images/signature.png"
 
 
 function Footer(props){
+
+  const data = useStaticQuery(graphql`
+    query footerStatic {
+     allStrapiServices {
+       edges {
+         node {
+           id
+           name
+           slug
+         }
+       }
+     }
+     strapiContactData {
+      address
+      phone
+      facebook
+      instagram
+     }
+    }
+  `)
+  const { address, phone, facebook, instagram } = data.strapiContactData
+
+
   return(
     <footer className="footer">
        <div className="w">
@@ -18,16 +41,16 @@ function Footer(props){
                    Не лечу, а делаю здоровыми только эклогичными методами
                 </div>
                 <address>
-                   <a href="tel:+">+7 495 111 22 33</a>
-                   <span>г. Москва, ул. Шаболовская, д.1</span>
+                   <a href={"tel:+"+phone.match(/\d+/g).join('')}>{phone}</a>
+                   <span>{address}</span>
                 </address>
                 <div className="socials">
-                   <a href="">
+                   <a href={"http://facebook.com/"+facebook}>
                      <svg className="inline-svg-icon">
                        <use href={sprite+"#facebook-big"}></use>
                      </svg>
                    </a>
-                   <a href="">
+                   <a href={instagram}>
                      <svg className="inline-svg-icon">
                        <use href={sprite+"#instagram-big"}></use>
                      </svg>
@@ -35,33 +58,16 @@ function Footer(props){
                 </div>
                 <small className="copyright">@2011-2021 ЭКОКЛИНИКА</small>
              </div>
-             <div className="col-7">
-                 <StaticQuery
-                   query={graphql`
-                      query servicesList {
-                        allStrapiServices {
-                          edges {
-                            node {
-                              id
-                              name
-                              slug
-                            }
-                          }
-                        }
-                      }
-                   `}
-                   render={data => (
-                      <div className="row">
-                      <div className="col-6">
-                         <ul>
-                          {data.allStrapiServices.edges.map((l,index)=>(
-                            <li key={l.node.id}><a href={"/service/"+l.node.slug}>{l.node.name}</a></li>
-                          ))}
-                          </ul>
-                      </div>
-                      </div>
-                   )}
-                 />
+             <div className="col-6 footer-navi">
+                <div className="row">
+                  <div className="col-6">
+                     <ul>
+                      {data.allStrapiServices.edges.map((l,index)=>(
+                        <li key={l.node.id}><a href={"/service/"+l.node.slug}>{l.node.name}</a></li>
+                      ))}
+                      </ul>
+                  </div>
+                </div>
                 <div className="row">
                    <div className="col-6">
                       <div className="h">О клинике</div>
