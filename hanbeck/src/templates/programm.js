@@ -28,6 +28,8 @@ function Programm(props){
     customPaging:(i => <button>{i + 1}</button>),
     afterChange:function(index){
       slider.current.slickGoTo(index)
+      sliderBg.current.style.backgroundColor=sliderContainer.current.querySelector(`div[data-index="${index}"] li[data-bg]`).dataset.bg
+      console.log(sliderContainer.current);
     }
   }
   const sliderPhotos = {
@@ -40,6 +42,8 @@ function Programm(props){
     auto:false,
   }
   const slider = React.useRef(null);
+  const sliderBg = React.useRef(null);
+  const sliderContainer = React.useRef(null);
 
 
   return (
@@ -83,11 +87,11 @@ function Programm(props){
       <section className="bg-beige">
         <section className="section section-wide feedback-slide prices-slide mb0">
            <div className="block photo">
-            <div className="slideshow">
+            <div className="slideshow" ref={sliderContainer}>
               <ul>
                 <Slider {...sliderPhotos} id="feedbackPhotos" ref={slider}>
                 {programm.thirdlevel.map((item,i)=>(
-                  <li key={i}>
+                  <li key={i} data-bg={item.forprogramm.bg}>
                     <div className="video-thumb"> 
                       <img src={item.forprogramm.img.publicURL} alt="" />
                     </div>
@@ -97,20 +101,20 @@ function Programm(props){
               </ul>
             </div>
            </div>
-           <div className={"block bg-beige banner-side"}>
+           <div className={"block banner-side banner-side-bg"} style={{backgroundColor:programm.thirdlevel[0].forprogramm.bg}} ref={sliderBg}>
              <div className="block-w">
                <div className="banner-side-text">
               <h2 className="h3 section-h">В программу входят:</h2>
               <Slider {...sliderTexts} id="feedbackTexts">
               {programm.thirdlevel.map((item,i)=>(
-                  <React.Fragment key={i}>
+                  <div key={i}>
                     <div className="feedback-author">
                       <h3 className="h2">{item.name}</h3>
                     </div>
                     <div className="feedback-text">
                       <p>{item.forprogramm.description}</p>
                     </div>
-                  </React.Fragment>
+                  </div>
                   ))}
                   </Slider>
                </div>
@@ -269,6 +273,7 @@ export const query = graphql`
             publicURL
           }
           description
+          bg
         }
         name
       }

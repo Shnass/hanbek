@@ -16,7 +16,7 @@ function Price(props){
   const price = props.data.strapiPrices;
 
   const sliderSettings = {
-    dots: true,
+    dots: false,
     draggable:false,
     arrows: true,
     infinite: false,

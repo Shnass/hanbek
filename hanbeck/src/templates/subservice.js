@@ -24,6 +24,10 @@ function SubService(props){
     cssEase: 'linear',
     auto:true,
   }
+  const priceIncludes = function(e){
+    e.preventDefault();
+    e.target.nextSibling.classList.toggle('shown')
+  }
 
   return (
     <React.Fragment>
@@ -133,6 +137,9 @@ function SubService(props){
                                 <div className="price-unit-sale">
                                       <div className="sale-item" data-sale={unit.discount}>
                                             <span>{unit.discount}%</span>
+                                            <svg viewPort="0 0 90 90" version="1.1" preserveAspectRatio="xMinYMin meet">
+                                              <circle r="43" cx="56" cy="56" fill="transparent" stroke-width="5" stroke-dashoffset="0" stroke="black" stroke-dasharray={270/100*unit.discount+" 270"}></circle>
+                                            </svg>
                                       </div>
                                 </div>
                                 <div className="price-unit-text">
@@ -141,7 +148,12 @@ function SubService(props){
                                 </div>
                                 <div className="price-unit-price">
                                       <div className="price">от {unit.price} Р</div>
-                                      <a href="" className="price-about">Что входит в цену?</a>
+                                      <div className="price-about-container">
+                                        <a href="" className="price-about" onClick={priceIncludes}>Что входит в цену?</a>
+                                        <div className="price-about-modal">
+                                          {unit.includes}
+                                        </div>
+                                      </div>
                                 </div>
                           </div>
                         ))}
@@ -287,6 +299,7 @@ export const query = graphql`
           slug
           name
           discount
+          includes
           description
         }
         pictures {

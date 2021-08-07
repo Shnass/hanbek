@@ -11,14 +11,14 @@ function IndexPage(props){
     <main>
 
     <Section title={"Лицензии"} classes={"mb0 bg-cyan padded"}>
-      <div class="w">
-            <div class="licenses-list">
-                  <div class="row">
-                        {props.data.allStrapiLicenses.edges.map(license => (
-                          <div class="col-6 col-sm-12">
-                                <div class="license-unit">
+      <div className="w">
+            <div className="licenses-list">
+                  <div className="row">
+                        {props.data.allStrapiLicenses.edges.map((license,i) => (
+                          <div className="col-6 col-sm-12" key={i}>
+                                <div className="license-unit">
                                       <h2>{license.node.name}</h2>
-                                      <div class="license-about">
+                                      <div className="license-about">
                                             {license.node.description}
                                       </div>
                                       <figure><img src={license.node.picture.publicURL} alt="" /></figure>

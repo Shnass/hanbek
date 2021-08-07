@@ -22,6 +22,17 @@ function Header(props){
 	  naviTabToggle(+e.target.dataset.tab)
 	}
 
+	const links=document.querySelectorAll('.header-navi a');
+	links.forEach(function(element){
+		element.addEventListener("click", 
+			function(){
+				naviMobToggle(false)	
+			}
+		)
+		
+	})
+
+
 	const data = useStaticQuery(graphql`
 	  query headerStatic {
 	   allStrapiServices {
@@ -51,6 +62,7 @@ function Header(props){
 	const { address, phone, whatsapp, instagram, workhours } = data.strapiContactData
 
 
+
 	return(
 		<header className="header">
 		  <div className="header-row">
@@ -61,7 +73,7 @@ function Header(props){
                    </svg>
 	             </div>
 		         <div className="header-logo">
-		            <a href="/"><img src={logo} alt="" /></a>
+		            <Link to="/"><img src={logo} alt="" /></Link>
 		         </div>
 		         <div className={"header-navi "+((!naviMob)?"":"shown")}>
 	 		         <nav className={"site-navi " + ((naviTab===1)?"on":"")}>

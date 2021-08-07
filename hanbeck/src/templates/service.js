@@ -13,10 +13,22 @@ import eye from "../images/promo-eye.jpg"
 function Service(props){
 
   const service = props.data.strapiServices;
+  const css = `
+  .topic-banner:after{
+    content:'';
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(180deg, rgba(255, 255, 255, 0) 58.01%, ${service.banner_color} 100%);
+  }`;
+
 
   return (
     <React.Fragment>
       <section className="section topic-banner inverse mb0" style={{backgroundColor:service.banner_color}}>
+        <style>{css}</style>
         <div className="w">
           <h1>{service.name}</h1>
           <div className="topic-banner-text" dangerouslySetInnerHTML={{__html: service.description}} />
