@@ -80,7 +80,8 @@ function Header(props){
 	 		            <ul>
 	 		               <li><Link to="/services/">Услуги</Link></li>
 	 		               <li><Link to="/doctors/">Врачи</Link></li>
-	 		               <li><Link to="/licenses/">Лицензии</Link></li>
+	 		               <li><Link to="/programms/">Программы</Link></li>
+	 		               <li><Link to="/prices/">Цены</Link></li>
 	 		               <li><Link to="/contacts/">Контакты</Link></li>
 	 		            </ul>
 	 		         </nav>
